@@ -1,13 +1,9 @@
 service:
   name: it-trend
 
-crawling:
-  target:
-    brunch: https://brunch.co.kr/keyword/IT_%ED%8A%B8%EB%A0%8C%EB%93%9C?q=g
-    cwn: https://www.cwn.kr/news/articleList.html?sc_section_code=S1N2&view_type=sm
-    cwntech: https://www.cwn.kr/news/articleList.html?sc_section_code=S1N3&view_type=sm
-    yozm: https://yozm.wishket.com/magazine/list/develop/
-    maestro: https://blog.naver.com/PostList.naver?blogId=sw_maestro&from=postList&categoryNo=13&parentCategoryNo=13
+webdriver:
+  chrome:
+    driver: classpath:/driver/chromedriver.exe
 
 server:
   port: 8080
