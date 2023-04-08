@@ -1,9 +1,5 @@
 service:
   name: it-trend
 
-webdriver:
-  chrome:
-    driver: classpath:/driver/chromedriver.exe
-
 server:
   port: 8080
