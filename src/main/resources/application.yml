@@ -1,0 +1,5 @@
+service:
+  name: it-trend
+
+server:
+  port: 8080
