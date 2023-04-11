@@ -16,6 +16,7 @@
 ### 기술 스택
 * Backend: Kotlin + Spring boot
 * Scraping Tool : Selenium
-* DB: Postgresql (예정)
+* DB: ~~Postgresql~~ MongoDB
+  * 크롤링한 데이터를 관리함에 있어 document DB 형태의 MongoDB가 적합할 것으로 보인다.
 * Frontend: React Native
 * Server: 
