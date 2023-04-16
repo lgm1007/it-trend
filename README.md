@@ -23,3 +23,9 @@
   * 크롤링한 데이터를 관리함에 있어 document DB 형태의 MongoDB가 적합할 것으로 보인다.
 * Frontend: React Native
 * Server: 
+### 📄 데이터베이스 설계
+* **게시글 테이블**
+
+|post_id|post_site|post_link|write_date|create_date
+|---|---|---|---|---|
+|게시글 ID<br/>primary key|게시글 사이트|게시글 링크|게시글 작성일자<br/>없는 경우 null|데이터 수집일자|
