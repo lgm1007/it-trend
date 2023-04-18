@@ -47,23 +47,19 @@ class SeleniumUtils {
                 }
             }
 
-            var postElementList: List<WebElement> = driver.findElements(By.cssSelector(".wrap_article_list .list_article .list_has_image a.link_post"))
+            val postElementList: List<WebElement> = driver.findElements(By.cssSelector(".wrap_article_list .list_article .list_has_image a.link_post"))
             for (pe in postElementList) {
                 // 초기에는 게시글 내용을 그대로 가져와서 화면에 출력해주는 형태로 구상하였으나, 해당 사이트의 서버에 저장된 이미지로 게시글을 작성하여 이미지를 가져오기 어려운 상황이 있는 등 여러 문제가 존재하다.
                 // 따라서 게시글의 링크를 크롤링하여 링크의 리스트를 화면에 출력해주는 형태의 앱으로 기획을 변경한다.
-                var postLink: String = pe.getAttribute("href")
-                println("---------")
-                println(postLink)
-                driver.get(postLink)
-                Thread.sleep(2000)
-
                 // 게시글을 구별하기 위해 게시글의 제목과 등록일자를 수집한다.
                 // brunch의 경우 등록일자가 없고, O분 전 형태로 시간을 출력해주기 때문에 등록일자를 따로 수집하지 않는다.
-                var titleElement: WebElement = driver.findElement(By.cssSelector("h1.cover_title"))
-                println("----TITLE----")
-                println(titleElement.text)
+                var childElement: WebElement = pe.findElement(By.cssSelector(".post_title strong.tit_subject"))
 
-                driver.navigate().back()
+                var postLink: String = pe.getAttribute("href")
+                var postText: String = childElement.text
+                println("---------")
+                println(postLink)
+                println(postText)
             }
         } catch (e: InterruptedException) {
             println("Catch InterruptedException: " + e.message)
