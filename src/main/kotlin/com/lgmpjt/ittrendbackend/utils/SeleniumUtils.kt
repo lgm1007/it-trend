@@ -20,14 +20,14 @@ class SeleniumUtils {
         val driver:WebDriver = ChromeDriver(options)
 
         when (service) {
-            "brunch" -> crawlBrunchPostTest(driver)
-            "cwn" -> crawlBrunchPostTest(driver)
-            "cwntech" -> crawlBrunchPostTest(driver)
-            else -> crawlBrunchPostTest(driver)
+            "brunch" -> crawlBrunchPost(driver)
+            "cwn" -> crawlCwnPostTest(driver)
+            "cwntech" -> crawlBrunchPost(driver)
+            else -> crawlBrunchPost(driver)
         }
     }
 
-    fun crawlBrunchPostTest(driver: WebDriver) {
+    fun crawlBrunchPost(driver: WebDriver) {
         val targetUrl = CrawlTarget.BRUNCH.url
         try {
             driver.get(targetUrl)
@@ -56,13 +56,36 @@ class SeleniumUtils {
                 var childElement: WebElement = pe.findElement(By.cssSelector(".post_title strong.tit_subject"))
 
                 var postLink: String = pe.getAttribute("href")
-                var postText: String = childElement.text
+                var postTitle: String = childElement.text
                 println("---------")
                 println(postLink)
-                println(postText)
+                println(postTitle)
             }
         } catch (e: InterruptedException) {
-            println("Catch InterruptedException: " + e.message)
+            println("Catch InterruptedException in crawlBrunchPost(): " + e.message)
+        } finally {
+            driver.close()
+            driver.quit()
+        }
+    }
+
+    fun crawlCwnPostTest(driver: WebDriver) {
+        val targetUrl = CrawlTarget.CWN.url
+        try {
+            driver.get(targetUrl)
+            // 브라우저 로딩 대기
+            Thread.sleep(2000)
+
+            val targetElementList: List<WebElement> = driver.findElements(By.cssSelector("#section-list .type2 li .view-cont h4.titles a"))
+            for (te in targetElementList) {
+                var postLink: String = te.getAttribute("href")
+                var postTitle: String = te.text
+                println("---------")
+                println(postLink)
+                println(postTitle)
+            }
+        } catch (e: InterruptedException) {
+            println("Catch InterruptedException in crawlCwnPostTest(): " + e.message)
         } finally {
             driver.close()
             driver.quit()

@@ -15,6 +15,9 @@ class ItTrendBackendApplicationTests {
     fun processCrawl() {
         val seleniumService = SeleniumService()
         seleniumService.processCrawl("brunch")
+//        seleniumService.processCrawl("cwn")
+//        seleniumService.processCrawl("cwntech")
+//        seleniumService.processCrawl("yozm")
     }
 
 }
