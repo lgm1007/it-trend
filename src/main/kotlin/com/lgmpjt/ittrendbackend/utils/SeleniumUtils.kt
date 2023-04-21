@@ -21,8 +21,8 @@ class SeleniumUtils {
 
         when (service) {
             "brunch" -> crawlBrunchPost(driver)
-            "cwn" -> crawlCwnPostTest(driver)
-            "cwntech" -> crawlBrunchPost(driver)
+            "cwn" -> crawlCwnPost(driver)
+            "cwntech" -> crawlCwnTechPost(driver)
             else -> crawlBrunchPost(driver)
         }
     }
@@ -69,8 +69,31 @@ class SeleniumUtils {
         }
     }
 
-    fun crawlCwnPostTest(driver: WebDriver) {
+    fun crawlCwnPost(driver: WebDriver) {
         val targetUrl = CrawlTarget.CWN.url
+        try {
+            driver.get(targetUrl)
+            // 브라우저 로딩 대기
+            Thread.sleep(2000)
+
+            val targetElementList: List<WebElement> = driver.findElements(By.cssSelector("#section-list .type2 li .view-cont h4.titles a"))
+            for (te in targetElementList) {
+                var postLink: String = te.getAttribute("href")
+                var postTitle: String = te.text
+                println("---------")
+                println(postLink)
+                println(postTitle)
+            }
+        } catch (e: InterruptedException) {
+            println("Catch InterruptedException in crawlCwnPostTest(): " + e.message)
+        } finally {
+            driver.close()
+            driver.quit()
+        }
+    }
+
+    fun crawlCwnTechPost(driver: WebDriver) {
+        val targetUrl = CrawlTarget.CWNTECH.url
         try {
             driver.get(targetUrl)
             // 브라우저 로딩 대기
