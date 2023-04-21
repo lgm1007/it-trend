@@ -1,6 +1,6 @@
 package com.lgmpjt.ittrendbackend.utils
 
-import com.lgmpjt.ittrendbackend.enums.CrawlTarget
+import com.lgmpjt.ittrendbackend.domain.CrawlTarget
 import org.openqa.selenium.By
 import org.openqa.selenium.PageLoadStrategy
 import org.openqa.selenium.WebDriver

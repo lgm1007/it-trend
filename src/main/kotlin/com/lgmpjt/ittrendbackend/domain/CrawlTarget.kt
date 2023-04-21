@@ -1,4 +1,4 @@
-package com.lgmpjt.ittrendbackend.enums
+package com.lgmpjt.ittrendbackend.domain
 
 enum class CrawlTarget(val service: String, val url: String) {
     BRUNCH("brunch", "https://brunch.co.kr/"),
