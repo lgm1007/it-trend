@@ -70,19 +70,31 @@ class SeleniumUtils {
     }
 
     fun crawlCwnPost(driver: WebDriver) {
+        val dateUtils = DateUtils()
         val targetUrl = CrawlTarget.CWN.url
+
         try {
             driver.get(targetUrl)
             // 브라우저 로딩 대기
             Thread.sleep(2000)
 
-            val targetElementList: List<WebElement> = driver.findElements(By.cssSelector("#section-list .type2 li .view-cont h4.titles a"))
+            val targetElementList: List<WebElement> = driver.findElements(By.cssSelector("#section-list .type2"))
             for (te in targetElementList) {
-                var postLink: String = te.getAttribute("href")
-                var postTitle: String = te.text
+                // 게시글 링크 부분 요소
+                var postElement: WebElement = te.findElement(By.cssSelector("li .view-cont h4.titles a"))
+                // 작성일자 부분 요소
+                var dateElement: WebElement = te.findElement(By.cssSelector("span.byline em"))
+
+                var postLink: String = postElement.getAttribute("href")
+                var postTitle: String = postElement.text
+                var writeDate: String = dateElement.text
+
+                // 작성일자 포맷 (yyyyMMddHHmm) <- 분 단위까지 있을 때는 이 포맷으로 변환하여 관리
+                writeDate = dateUtils.formatDate(writeDate, "yyyy.MM.dd HH:mm", "yyyyMMddHHmm")
                 println("---------")
                 println(postLink)
                 println(postTitle)
+                println(writeDate)
             }
         } catch (e: InterruptedException) {
             println("Catch InterruptedException in crawlCwnPostTest(): " + e.message)
@@ -93,19 +105,31 @@ class SeleniumUtils {
     }
 
     fun crawlCwnTechPost(driver: WebDriver) {
+        val dateUtils = DateUtils()
         val targetUrl = CrawlTarget.CWNTECH.url
+
         try {
             driver.get(targetUrl)
             // 브라우저 로딩 대기
             Thread.sleep(2000)
 
-            val targetElementList: List<WebElement> = driver.findElements(By.cssSelector("#section-list .type2 li .view-cont h4.titles a"))
+            val targetElementList: List<WebElement> = driver.findElements(By.cssSelector("#section-list .type2"))
             for (te in targetElementList) {
-                var postLink: String = te.getAttribute("href")
-                var postTitle: String = te.text
+                // 게시글 링크 부분 요소
+                var postElement: WebElement = te.findElement(By.cssSelector("li .view-cont h4.titles a"))
+                // 작성일자 부분 요소
+                var dateElement: WebElement = te.findElement(By.cssSelector("span.byline em"))
+
+                var postLink: String = postElement.getAttribute("href")
+                var postTitle: String = postElement.text
+                var writeDate: String = dateElement.text
+
+                // 작성일자 포맷 (yyyyMMddHHmm) <- 분 단위까지 있을 때는 이 포맷으로 변환하여 관리
+                writeDate = dateUtils.formatDate(writeDate, "yyyy.MM.dd HH:mm", "yyyyMMddHHmm")
                 println("---------")
                 println(postLink)
                 println(postTitle)
+                println(writeDate)
             }
         } catch (e: InterruptedException) {
             println("Catch InterruptedException in crawlCwnPostTest(): " + e.message)
