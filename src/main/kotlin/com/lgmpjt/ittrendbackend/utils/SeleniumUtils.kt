@@ -87,10 +87,9 @@ class SeleniumUtils {
 
                 var postLink: String = postElement.getAttribute("href")
                 var postTitle: String = postElement.text
-                var writeDate: String = dateElement.text
-
                 // 작성일자 포맷 (yyyyMMddHHmm) <- 분 단위까지 있을 때는 이 포맷으로 변환하여 관리
-                writeDate = dateUtils.formatDate(writeDate, "yyyy.MM.dd HH:mm", "yyyyMMddHHmm")
+                var writeDate: String = dateUtils.formatDate(dateElement.text, "yyyy.MM.dd HH:mm", "yyyyMMddHHmm")
+
                 println("---------")
                 println(postLink)
                 println(postTitle)
@@ -122,10 +121,9 @@ class SeleniumUtils {
 
                 var postLink: String = postElement.getAttribute("href")
                 var postTitle: String = postElement.text
-                var writeDate: String = dateElement.text
-
                 // 작성일자 포맷 (yyyyMMddHHmm) <- 분 단위까지 있을 때는 이 포맷으로 변환하여 관리
-                writeDate = dateUtils.formatDate(writeDate, "yyyy.MM.dd HH:mm", "yyyyMMddHHmm")
+                var writeDate: String = dateUtils.formatDate(dateElement.text, "yyyy.MM.dd HH:mm", "yyyyMMddHHmm")
+
                 println("---------")
                 println(postLink)
                 println(postTitle)
