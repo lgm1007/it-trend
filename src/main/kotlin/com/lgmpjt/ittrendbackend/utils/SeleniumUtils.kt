@@ -23,7 +23,7 @@ class SeleniumUtils {
             "brunch" -> crawlBrunchPost(driver)
             "cwn" -> crawlCwnPost(driver)
             "cwntech" -> crawlCwnTechPost(driver)
-            else -> crawlBrunchPost(driver)
+            else -> crawlYozmPost(driver)
         }
     }
 
@@ -131,6 +131,32 @@ class SeleniumUtils {
             }
         } catch (e: InterruptedException) {
             println("Catch InterruptedException in crawlCwnPostTest(): " + e.message)
+        } finally {
+            driver.close()
+            driver.quit()
+        }
+    }
+
+    fun crawlYozmPost(driver: WebDriver) {
+        val targetUrl = CrawlTarget.YOZM.url
+
+        try {
+            driver.get(targetUrl)
+            // 브라우저 로딩 대기
+            Thread.sleep(2000)
+
+            val targetElementList: List<WebElement> = driver.findElements(By.cssSelector(".list-cover .list-item-link .list-item .flex-box .item-main a.item-title"))
+            for(te in targetElementList) {
+                // Yozm 사이트 또한 작성일자가 따로 없어 따로 수집하지 않는다.
+                var postLink: String = te.getAttribute("href")
+                var postTitle: String = te.text
+
+                println("---------")
+                println(postLink)
+                println(postTitle)
+            }
+        } catch (e: InterruptedException) {
+            println("Catch InterruptedException in crawlYozmPost(): " + e.message)
         } finally {
             driver.close()
             driver.quit()
